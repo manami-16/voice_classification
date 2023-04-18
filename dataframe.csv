@@ -1,5 +1,5 @@
-,filename,class,classID
-0,angry1.wav,angry,0
-1,angry2.wav,angry,0
-2,happy1.wav,happy,1
-3,happy2.wav,happy,1
+,filename,class,classID,duration
+0,angry_1.wav,angry,0,1.856
+1,angry_2.wav,angry,0,2.176
+2,happy_1.wav,happy,1,2.816
+3,happy_2.wav,happy,1,1.1306666666666667

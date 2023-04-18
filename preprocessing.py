@@ -33,12 +33,12 @@ def make_dataframe():
     for file in dir_list:
         _file = file.split('_')
         if _file[0] == 'angry':
-            data['filename'].append(_file[0] + _file[-1])
+            data['filename'].append(_file[0] + '_' + _file[-1])
             data['class'].append('angry')
             data['classID'].append(0)
             
         elif _file[0] == 'happy':
-            data['filename'].append(_file[0] + _file[-1])
+            data['filename'].append(_file[0] + '_' + _file[-1])
             data['class'].append('happy')
             data['classID'].append(1)
     
