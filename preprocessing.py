@@ -17,10 +17,12 @@ def convert_m4a_to_wav():
     for extension in extension_list:
         for audio in glob.glob(extension):
             wav_filename = os.path.splitext(os.path.basename(audio))[0] + '.wav'
-            wav_filename = wav_filename.split('_')[0] + '_' + wav_filename.split('_')[-1]
+            if len(wav_filename.split(' ')) == 1:
+                wav_filename = wav_filename.split(' ')[0]
+            else:
+                wav_filename = wav_filename.split(' ')[0] + '_' + wav_filename.split(' ')[1]
+                
             AudioSegment.from_file(audio).export(export_dir + wav_filename, format='wav')
-    
-#     os.close(m4a_dir)
     return None
 
 def make_dataframe():
@@ -43,7 +45,6 @@ def make_dataframe():
             data['classID'].append(1)
     
 #     os.close()
-    print(data)
     df = pd.DataFrame(data)
     df.to_csv('../dataframe.csv')
     
@@ -64,7 +65,9 @@ def remove_silence(alpha=20):
             data = np.array(data)
             num_slience = np.count_nonzero(abs(data) < 20)
             ratio = 100 * num_slience / len(data)
-            print(f'{i} -- {ratio:.2f}% of data will be removed')
+            
+            if i % 10 == 0:
+                print(f'{i} -- {ratio:.2f}% of data will be removed')
             
             data = data[abs(data) > alpha]
             filename = '../trimmed_data/' + dir_list[i].split('.')[0] + '.npy'
