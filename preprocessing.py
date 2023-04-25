@@ -9,10 +9,10 @@ from scipy.io.wavfile import read
 import numpy as np
 
 def convert_m4a_to_wav():
-    m4a_dir = './m4a_data/'
+    m4a_dir = 'voice_classification/m4a_data/'
     extension_list = ('*.m4a', '*.flv')
     os.chdir(m4a_dir)
-    export_dir = '../wav_data/'
+    export_dir = 'voice_classification/wav_data/'
     
     for extension in extension_list:
         for audio in glob.glob(extension):
@@ -26,7 +26,7 @@ def convert_m4a_to_wav():
     return None
 
 def make_dataframe():
-    path = '../wav_data/'
+    path = 'voice_classification/wav_data/'
     dir_list = os.listdir(path)
     data = {'filename': [], 
             'class': [], 
@@ -46,7 +46,7 @@ def make_dataframe():
     
 #     os.close()
     df = pd.DataFrame(data)
-    df.to_csv('../dataframe.csv')
+    df.to_csv('voice_classification/dataframe.csv')
     
     return df
 
@@ -54,7 +54,7 @@ def remove_silence(alpha=20):
     
     ## retreive all data under wav_data
     ## extract where the absolute intensity is greater than alpha = 20
-    path = '../wav_data/'
+    path = 'voice_classification/wav_data/'
     dir_list = os.listdir(path)
     
     trimmed_data = []
@@ -70,7 +70,7 @@ def remove_silence(alpha=20):
                 print(f'{i} -- {ratio:.2f}% of data will be removed')
             
             data = data[abs(data) > alpha]
-            filename = '../trimmed_data/' + dir_list[i].split('.')[0] + '.npy'
+            filename = 'voice_classification/trimmed_data/' + dir_list[i].split('.')[0] + '.npy'
             np.save(file=filename, arr=data)
 #     os.close(path)
     return None
@@ -78,7 +78,7 @@ def remove_silence(alpha=20):
 def normalize_data():
     
     ## min/max normalization
-    path = '../trimmed_data/'
+    path = 'voice_classification/trimmed_data/'
     dir_list = os.listdir(path)
     
     for i in range(len(dir_list)):

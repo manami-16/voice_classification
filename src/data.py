@@ -37,7 +37,7 @@ def adjust_datasize(X_data):
     
 def get_wavedata(df):
     wave = []
-    path = './trimmed_data/'
+    path = 'voice_classification/trimmed_data/'
     for file in df['filename']:
         file = file.split('.')[0]
         array = np.load(path + file + '.npy').reshape(-1, 1)
